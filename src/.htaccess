@@ -1,0 +1,2 @@
+AddHandler application/x-httpd-php .php .html
+#AddType image/svg+xml .svg

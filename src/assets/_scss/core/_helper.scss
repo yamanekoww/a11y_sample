@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+@import "core";
+
+// width
+@for $i from 1 through 10 {
+	.w#{$i}p { width: 10% * $i !important; }
+}
+
+// media query flex margin
+.mats {
+	margin-top: 10px;
+
+	@include viewTabPc {
+		margin-top: 20px;
+	}
+}
+.matm {
+	margin-top: 20px;
+
+	@include viewTabPc {
+		margin-top: 40px;
+	}
+}
+.matl {
+	margin-top: 30px;
+
+	@include viewTabPc {
+		margin-top: 60px;
+
+	}
+}
+.mat2l {
+	margin-top: 40px;
+
+	@include viewTabPc {
+		margin-top: 80px;
+
+	}
+}
+
+// font weight
+.fw	{ font-weight: bold !important; }
+
+// font color
+.cred { color: #c00 !important; }
+
+// media query display
+
+.hide-sp {
+	@include viewSp {
+		display: none !important;
+	}
+}
+.hide-tab {
+	@include viewTab {
+		display: none !important;
+	}
+}
+
+.hide-pc {
+	@include viewPc {
+		display: none !important;
+	}
+}
+
+//text-align
+.tal	{ text-align: left !important; }
+.tac	{ text-align: center !important; }
+.tar	{ text-align: right !important; }
+
+.tdu{
+	text-decoration: underline;
+}
+
+.oh{
+	overflow: hidden;
+}
+
+.vm{
+	vertical-align: middle !important;
+}
+.fsi{
+	font-style: italic !important;
+}

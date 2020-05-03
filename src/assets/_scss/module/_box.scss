@@ -1,0 +1,430 @@
+@charset "UTF-8";
+
+/*
+  module: m-box-fixed
+  - 固定幅・中央揃えのボックス
+*/
+[data-fixed] {
+	padding: 0 15px;
+
+	@include viewTabPc() {
+		width: $fixedWidth;
+		margin: 0 auto;
+	}
+}
+
+
+
+.m-box-pagepath {
+	font-size: 1.4rem;
+	background-color: #f5f5f7;
+	padding: 8px 0;
+
+	@include viewTabPc() {
+		padding: 6px 0 8px;
+	}
+
+	.pagepath-list {
+		display: flex;
+		flex-wrap:wrap;
+
+		> .list-item {
+			padding:3px 20px 3px 0;
+			line-height: 1.25;
+			display: flex;
+			align-items: center;
+
+
+			&:after{
+				display: inline-block;
+				content: unicode("FF1E");
+				// color: #fff;
+				color: $defaultTxtColor;
+				margin-left: 20px;
+				font-size: 1.0rem;
+			}
+
+
+			&:last-child {
+				&:after{
+					display: none;
+				}
+			}
+
+			.item-inner{
+				position: relative;
+				display: inline-block;
+				text-decoration: none;
+
+				&:link,&:visited{
+					color: $defaultTxtColor;
+				}
+
+			}
+
+			a.item-inner{
+				@include hover() {
+
+					text-decoration: underline;
+
+				}
+			}
+		}
+	}
+}
+
+
+
+
+// FAQタイプ
+.m-box-accordion{
+	margin-top: 40px;
+	position: relative;
+	counter-reset:question;
+	counter-increment: question;
+
+	@include viewTabPc() {
+		margin-top: 80px;
+	}
+
+	&:before{
+		top: 0;
+		content:'';
+		height: 1px;
+		background-color: #d7d7d7;
+		position: absolute;
+		// margin-left: -20px;
+		width: calc(100%);
+
+		@include viewTabPc() {
+			width: 100%;
+			margin-left: auto;
+		}
+	}
+
+	&:after{
+		content:'';
+		height: 1px;
+		background-color: #d7d7d7;
+		// margin-left: -20px;
+		width: calc(100%);
+		position: absolute;
+		bottom: 0;
+
+		@include viewTabPc() {
+			width: 100%;
+			margin-left: auto;
+		}
+	}
+
+
+	.accordion-head{
+		position: relative;
+		cursor: pointer;
+		display: block;
+		background-color: transparent;
+		border:none;
+		padding: 0;
+		width: 100%;
+		outline: none;
+
+		&:after {
+			position: absolute;
+			background-color: #141414;
+			width: 100%;
+			height: calc(100% - 2px);
+			display: block;
+			content:'';
+			top: 2px;
+			left: 0;
+			opacity: 0;
+			transition:all .2s ease-out;
+
+			@include viewTabPc() {
+				height: calc(100% - 6px);
+				width: 100%;
+				margin-left: auto;
+				top: 3px;
+			}
+		}
+
+		.head-wrap{
+			position: relative;
+			z-index: 1;
+			padding:20px 26.5px 20px 10px;
+			text-align: left;
+			display: flex;
+			transition: all .2s ease-out;
+
+			@include viewTabPc() {
+				padding:25px 60px 25px 20px;
+			}
+
+			> span{
+				position: relative;
+				font-weight: 500;
+			}
+
+			&:before,&:after{
+				content:'';
+				background-color: $blackColor;
+				width: 15px;
+				height: 2px;
+				display: block;
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				right: 10px;
+				margin: auto;
+				border-radius: 1px;
+
+				@include viewTabPc() {
+					width: 20px;
+					height: 2px;
+					right: 30px;
+				}
+			}
+
+			&:before{
+				transform:rotate(0deg);
+				transition: all .6s ease-out;
+			}
+			&:after{
+				transform:rotate(-90deg);
+				transition: all .6s ease-out;
+			}
+
+			.head-prefix{
+				font-weight: bold;
+				margin-right: 5px;
+				white-space: nowrap
+
+			}
+			.head-ttl{
+
+			}
+		}
+
+		&.is-active{
+			&:after {
+				opacity: .25;
+			}
+			.head-wrap{
+			}
+		}
+
+		&:hover {
+
+			&:after {
+				opacity: .25;
+			}
+			.head-wrap{
+			}
+		}
+
+		[data-whatinput="keyboard"] &:focus{
+			outline : solid 2px #000;
+
+		}
+
+	}//.accordion-head
+	.accordion-body{
+		padding:0 10px 20px 10px;
+		@include childMarginTop0() ;
+		display: none;
+
+		@include viewTabPc() {
+			padding: 0px 20px 25px;
+		}
+	}
+
+
+
+	&+.m-box-accordion{
+		counter-reset:none;
+		margin-top: 0;
+
+		&:before{
+			display: none;
+		}
+		.accordion-head{
+			&:after {
+				top: 2px;
+				height: calc(100% - 6px);
+
+				@include viewTabPc() {
+					top: 2px;
+					height: calc(100% - 5px);
+				}
+			}
+		}
+	}
+
+	&.is-active{
+		.accordion-head{
+			&:after {
+				opacity: .25;
+			}
+
+			.head-wrap{
+				&:before{
+					transform:rotate(180deg);
+				}
+				&:after{
+					transform:rotate(180deg);
+					opacity: 0;
+				}
+			}
+		}
+		.accordion-body{
+			padding-top: 20px;
+			@include viewTabPc() {
+				padding-top: 25px;
+			}
+		}
+	}
+
+
+	&.is-default-open{
+
+		.accordion-head{
+			&:after {
+				opacity: .25;
+			}
+
+			.head-wrap{
+				&:before{
+					transform:rotate(180deg);
+				}
+				&:after{
+					transform:rotate(180deg);
+					opacity: 0;
+				}
+			}
+		}
+
+		.accordion-body{
+			display: block;
+			padding-top: 20px;
+			@include viewTabPc() {
+				padding-top: 25px;
+			}
+		}
+	}
+
+	&.accordion-qa{
+		.accordion-head{
+			.head-wrap{
+				padding:0px 26.5px 0px 10px;
+
+				@include viewTabPc() {
+					padding:0px 60px 0px 20px;
+				}
+
+				> span{
+					position: relative;
+					padding-left: 37.5px;
+					padding:15px 0 15px 37.5px;
+					font-weight: 500;
+
+					@include viewTabPc() {
+						padding:25px 0 25px 56px;
+					}
+					&:before {
+						content: "Q";
+						font-weight: bold;
+						display: block;
+						margin-right: 5px;
+						vertical-align: top;
+						z-index: 1;
+						position: absolute;
+
+						font-size: 13.5px;
+						width: 27px;
+						height: 27px;
+						background-color: #ebebeb;
+						border-radius: 50%;
+						display: flex;
+						justify-content: center;
+						align-items:center;
+						left: 0;
+						top: calc(15px + .0em);
+						margin: auto;
+
+
+
+
+						@include viewTabPc() {
+							width: 36px;
+							height: 36px;
+							font-size: 1.8rem;
+							top: calc(25px + .0em);
+						}
+					}
+				}
+			}
+
+		}//.accordion-head
+
+		.accordion-body{
+			position: relative;
+			padding:0 0 15px 47.5px;
+
+			@include viewTabPc() {
+				padding:0 0 25px 76px;
+
+			}
+			&:before {
+				content: "A";
+				font-weight: bold;
+				display: block;
+				margin-right: 5px;
+				vertical-align: top;
+				z-index: 1;
+				position: absolute;
+
+				font-size: 13.5px;
+				width: 27px;
+				height: 27px;
+				background-color: #ddd;
+				border-radius: 50%;
+				display: flex;
+				justify-content: center;
+				align-items:center;
+				left: 10px;
+				top: 20px;
+				margin: auto;
+				color: #fff;
+
+
+
+
+				@include viewTabPc() {
+					width: 36px;
+					height: 36px;
+					font-size: 1.8rem;
+					left: 20px;
+					top: 25px;
+				}
+			}
+		}//.accordion-body
+
+
+		&.is-active{
+			.accordion-body{
+				padding-top: 20px;
+				@include viewTabPc() {
+					padding-top: 25px;
+				}
+			}
+		}
+
+	}//&.accordion-qa
+
+
+}
+
+
+.m-box-height{
+	height: 700px;
+}

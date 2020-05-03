@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+// color setting
+$defaultBgColor: 	#fff;
+$defaultTxtColor: 	#111;
+$defaultLinkColor: 	#98117e;
+
+$keyColor: #e74291;
+$blackColor: #141414;
+
+$fontfamily:YakuHanJPs, "メイリオ", Meiryo, "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", "ＭＳ Ｐゴシック", "MS PGothic", Helvetica, Arial, sans-serif;
+
+// font size
+$defaultTxtSizeSp: 1.4rem;
+$defaultTxtSizePc: 1.6rem;
+
+// fixed width
+$fixedWidth: 960px;
+
+// media query
+$breakSp: "screen and (max-width: 767px)";
+$breakSpTab: "screen and (max-width: 1024px)";
+$breakTab: "screen and (min-width: 768px) and (max-width: 1024px)";
+$breakTabPc: "print, screen and (min-width: 768px)";
+$breakPc: "print, screen and (min-width: 1025px)";
+
+
+// line height
+$lineHeight: 1.75;

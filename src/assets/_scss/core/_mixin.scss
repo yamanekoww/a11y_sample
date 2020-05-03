@@ -1,0 +1,618 @@
+@charset "UTF-8";
+
+
+@function unicode($str) {
+	@return unquote("\"")+unquote(str-insert($str, "\\", 1))+unquote("\"");
+}
+
+
+@function colorCodeReplace($value) {
+	@return str-slice(#{$value}, 2);
+}
+
+
+@mixin yakuhan(){
+	/*! Yaku Han JP (Gothic - Small Amount) v2.0.0 SIL by Qrac / Based on Noto Sans CJK JP */
+	@font-face {
+		font-family: "YakuHanJPs";
+		font-style: normal;
+		font-weight: 100;
+		src: url("../fonts/YakuHanJPs/YakuHanJPs-Thin.eot");
+		src: url("../fonts/YakuHanJPs/YakuHanJPs-Thin.woff2") format("woff2"), url("../fonts/YakuHanJPs/YakuHanJPs-Thin.woff") format("woff");
+	}
+
+	@font-face {
+		font-family: "YakuHanJPs";
+		font-style: normal;
+		font-weight: 200;
+		src: url("../fonts/YakuHanJPs/YakuHanJPs-Light.eot");
+		src: url("../fonts/YakuHanJPs/YakuHanJPs-Light.woff2") format("woff2"), url("../fonts/YakuHanJPs/YakuHanJPs-Light.woff") format("woff");
+	}
+
+	@font-face {
+		font-family: "YakuHanJPs";
+		font-style: normal;
+		font-weight: 300;
+		src: url("../fonts/YakuHanJPs/YakuHanJPs-DemiLight.eot");
+		src: url("../fonts/YakuHanJPs/YakuHanJPs-DemiLight.woff2") format("woff2"), url("../fonts/YakuHanJPs/YakuHanJPs-DemiLight.woff") format("woff");
+	}
+
+	@font-face {
+		font-family: "YakuHanJPs";
+		font-style: normal;
+		font-weight: 400;
+		src: url("../fonts/YakuHanJPs/YakuHanJPs-Regular.eot");
+		src: url("../fonts/YakuHanJPs/YakuHanJPs-Regular.woff2") format("woff2"), url("../fonts/YakuHanJPs/YakuHanJPs-Regular.woff") format("woff");
+	}
+
+	@font-face {
+		font-family: "YakuHanJPs";
+		font-style: normal;
+		font-weight: 500;
+		src: url("../fonts/YakuHanJPs/YakuHanJPs-Medium.eot");
+		src: url("../fonts/YakuHanJPs/YakuHanJPs-Medium.woff2") format("woff2"), url("../fonts/YakuHanJPs/YakuHanJPs-Medium.woff") format("woff");
+	}
+
+	@font-face {
+		font-family: "YakuHanJPs";
+		font-style: normal;
+		font-weight: 700;
+		src: url("../fonts/YakuHanJPs/YakuHanJPs-Bold.eot");
+		src: url("../fonts/YakuHanJPs/YakuHanJPs-Bold.woff2") format("woff2"), url("../fonts/YakuHanJPs/YakuHanJPs-Bold.woff") format("woff");
+	}
+
+	@font-face {
+		font-family: "YakuHanJPs";
+		font-style: normal;
+		font-weight: 900;
+		src: url("../fonts/YakuHanJPs/YakuHanJPs-Black.eot");
+		src: url("../fonts/YakuHanJPs/YakuHanJPs-Black.woff2") format("woff2"), url("../fonts/YakuHanJPs/YakuHanJPs-Black.woff") format("woff");
+	}
+}
+
+// clearfix
+@mixin clearfix() {
+	*zoom: 1;
+
+	&:after {
+		content: " ";
+		display: table;
+		clear: both;
+	}
+}
+
+// css arrows
+@mixin arrow($width, $color, $direction, $position, $position-offset) {
+	$trans: (
+		left: right,
+		right: left,
+		top: bottom,
+		bottom: top,
+	);
+
+	position: absolute;
+	top: 50%;
+	#{$position}: #{$position-offset};
+	content: "";
+	width: 0;
+	height: 0;
+	margin-top: 0 - $width / 2;
+	border-style: solid;
+	border-width: $width / 2;
+	border-color: transparent;
+	border-#{map-get($trans, $direction)}-color: $color;
+	border-#{map-get($trans, $direction)}-width: $width;
+}
+
+// icon-font
+@mixin icon-font($size, $name, $color, $position, $position-offset) {
+	$font-map: (
+		"arrow-a02":"\e102",
+		"arrow-a03":"\e101",
+		"arrow-b02":"\e106",
+		"arrow-b04":"\e108",
+		"menu":"\e201",
+		"delete":"\e202",
+		"li-open":"\e203",
+		"li-close":"\e204",
+		"path":"\e205",
+		"pagetop":"\e206",
+		"blank":"\e207",
+		"global":"\e301",
+		"access":"\e302",
+		"panf":"\e303",
+		"contact":"\e304",
+		"map":"\e305",
+		"search":"\e306",
+		"rss":"\e307",
+		"school":"\e308",
+		"pencil":"\e309",
+		"smile":"\e310",
+		"flag":"\e311",
+		"star":"\e312",
+		"file-pdf":"\e401",
+		"file-word":"\e402",
+		"file-excel":"\e403"
+	);
+
+	font-family: 'fontname';
+	//speak: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	position: absolute;
+	#{$position}: #{$position-offset};
+	top: 50%;
+	margin-top: 0 - $size / 2;
+	color: $color;
+	font-size: $size;
+
+	content: map-get($font-map, $name);
+	text-indent: 0;
+}
+
+@mixin grid-row($gutter) {
+	margin: 0 (0-$gutter);
+	display: flex;
+	flex-wrap: wrap;
+
+	@media print {
+		display: block;
+		letter-spacing: -.40em;
+	}
+}
+
+@mixin grid($col,$num, $gutter) {
+	width: calc(100% / #{($col / $num)});
+
+	// IEハック
+	//https://qiita.com/zwirky/items/1e99a0797551ee9d4da9
+	width: calc((100% / #{($col / $num)} ) - 0.1px) \0;
+
+	padding: 0 $gutter;
+
+	@media print {
+		width: 100% / $col * $num;
+		display: inline-block;
+		padding: 0 $gutter;
+		box-sizing: border-box;
+		vertical-align: top;
+		letter-spacing: normal;
+	}
+}
+
+
+@mixin setIcon($icon, $color, $display:inline-block, $pathDepth:""){
+	content: '';
+	display: $display;
+	vertical-align: middle;
+	width: 1.125em;
+	height: 1.125em;
+	margin-left: 5px;
+	background: url('#{$pathDepth}../svg/i_#{$icon}.svg?c=#{colorCodeReplace($color)}') no-repeat right top;
+	background-size: 100% auto;
+	position: relative;
+	top: -0.2em;
+}
+
+@mixin selectorWrap($selector) {
+	@if $selector != ""{
+		&#{$selector} {
+			@content;
+		}
+	}@else{
+		@content;
+	}
+}
+
+
+@mixin linkIcon($color, $display:inline-block, $selector:"", $pathDepth:"") {
+
+	&[target='_blank']{
+		&:not(.noticon){
+			@include selectorWrap($selector) {
+				&:after{
+					// @include setIcon("blank",$color,$display,$pathDepth);
+					@include setIcon("blank",#004ea2,$display,$pathDepth);
+					height: 1.15em;
+				}
+			}
+		}
+	}
+
+	&[href$=".pdf"]{
+			&:not(.noticon){
+		@include selectorWrap($selector) {
+				&:after{
+					// @include setIcon("pdf",$color,$display,$pathDepth);
+
+					@include setIcon("pdf",#e60012,$display,$pathDepth);
+
+					width: 1.0625em;
+					height: 1.6em;
+					top: -0.1em;
+				}
+			}
+		}
+	}
+	&[href$=".doc"],&[href$=".docx"]{
+			&:not(.noticon){
+		@include selectorWrap($selector) {
+				&:after{
+					// @include setIcon("word",$color,$display,$pathDepth);
+					@include setIcon("word",#004ea2,$display,$pathDepth);
+
+					width: 1.0625em;
+					height: 1.5em;
+					top: -0.1em;
+				}
+			}
+		}
+	}
+	&[href$=".xls"],&[href$=".xlsx"]{
+			&:not(.noticon){
+		@include selectorWrap($selector) {
+				&:after{
+					// @include setIcon("excel",$color,$display,$pathDepth);
+					@include setIcon("excel",#009925,$display,$pathDepth);
+
+					width: 1.0625em;
+					height: 1.5em;
+					top: -0.1em;
+				}
+			}
+		}
+	}
+	&[href$=".zip"]{
+		&:not(.noticon){
+			@include selectorWrap($selector) {
+				&:after{
+					@include setIcon("zip",#004ea2,$display,$pathDepth);
+					width: 1.25em;
+					height: 1.25em;
+					top: -0.2em;
+				}
+			}
+		}
+	}
+
+}
+
+
+
+
+
+
+@mixin columnMarginTop($mtSp,$mtTabPc) {
+
+	> [data-gs="12"]{
+		@for $i from 1 through 4 {
+			> [data-gs-col="#{12 / $i}"] {
+
+				&:nth-child(n+#{$i + 1}) {
+					@include viewPc() {
+						margin-top: $mtTabPc;
+					}
+				}
+			}
+		}
+	}
+
+	> [data-gs-Tab="2"]{
+		@include viewTab() {
+			> [data-gs-col] {
+				&:nth-child(n+3) {
+					margin-top: $mtTabPc;
+				}
+				&[data-gs-col="12"] {
+					&:nth-child(n+2) {
+						margin-top: $mtTabPc;
+					}
+				}
+			}
+		}
+	}
+
+	> [data-gs-Tab="1"]{
+		@include viewTab() {
+			> [data-gs-col] {
+				&:nth-child(n+2) {
+					margin-top: $mtTabPc;
+				}
+			}
+		}
+	}
+
+	> [data-gs-sp="2"]{
+		@include viewSp() {
+			> [data-gs-col] {
+				&:nth-child(n+3) {
+					margin-top: $mtSp;
+				}
+			}
+		}
+	}
+
+	> [data-gs-sp="1"]{
+		@include viewSp() {
+			> [data-gs-col] {
+				&:nth-child(n+2) {
+					margin-top: $mtSp;
+				}
+			}
+		}
+	}
+
+
+
+}
+
+
+
+
+
+@mixin childMarginTop0() {
+	>*:first-child{
+
+		margin-top: 0 !important;
+
+		&.m-box-section{
+			padding-top: 0;
+		}
+
+		// &.m-list-link.link-border{
+		// 	//ネガティブマージンの分を引いた値
+		// 	margin-top: 0 - 15px !important;
+
+		// 	@include viewSp() {
+		// 		margin-top: 0 - 7.5px !important;
+		// 	}
+		// }
+	}
+
+	>.image-position-left:first-child + *,
+	>.image-position-right:first-child + *{
+		@include viewTabPc() {
+			margin-top: 0 !important;
+		}
+	}
+
+
+	> [data-gs]:first-child{
+		[data-gs-col]:first-child > *:first-child{
+			@include viewSp() {
+				margin-top: 0 !important;
+			}
+		}
+
+		@for $i from 1 through 4 {
+			> [data-gs-col="#{12 / $i}"]{
+
+				&:nth-child(-n+#{$i}){
+					> *:first-child{
+						@include viewPc() {
+							margin-top: 0 !important;
+						}
+					}
+
+					//2重カラム割に対応
+					> [data-gs]:first-child{
+						@for $i from 1 through 2 {
+							> [data-gs-col="#{12 / $i}"]{
+
+								&:nth-child(-n+#{$i}){
+									> *:first-child{
+										@include viewPc() {
+											margin-top: 0 !important;
+										}
+									}
+								}
+							}
+						}
+
+					}
+					// /2重カラム割に対応
+
+				}
+			}
+		}
+
+	}
+
+	> [data-gs-group]:first-child{
+		> [data-gs-col]{
+			> *:first-child{
+				@include viewPc() {
+					margin-top: 0 !important;
+				}
+			}
+		}
+
+		&[data-gs-tab="1"]{
+			> [data-gs-col]:first-child{
+				> *:first-child{
+					@include viewTab() {
+						margin-top: 0 !important;
+					}
+				}
+			}
+		}
+		&[data-gs-tab="2"]{
+			> [data-gs-col]:nth-child(-n+2){
+				> *:first-child{
+					@include viewTab() {
+						margin-top: 0 !important;
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+@mixin nextMarginTop0() {
+	+ *{
+		margin-top: 0 !important;
+
+		&.m-list-news{
+			//お知らせレイアウトの1行目の上部余白の分を引いた値
+			margin-top: -20px !important;
+		}
+	}
+
+	+ .image-position-left + *,
+	+ .image-position-right + *{
+
+		@include viewTab() {
+			margin-top: 0 !important;
+		}
+	}
+
+	+ [data-gs]{
+		[data-gs-col]:first-child > *:first-child{
+			@include viewSp() {
+				margin-top: 0 !important;
+			}
+		}
+		@for $i from 1 through 4 {
+			> [data-gs-col="#{12 / $i}"]{
+
+				&:nth-child(-n+#{$i}){
+					> *:first-child{
+						@include viewPc() {
+							margin-top: 0 !important;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	+ [data-gs-group]{
+		> [data-gs-col]{
+			> *:first-child{
+				@include viewPc() {
+					margin-top: 0 !important;
+				}
+			}
+		}
+
+		&[data-gs-tab="1"]{
+			> [data-gs-col]:first-child{
+				> *:first-child{
+					@include viewTab() {
+						margin-top: 0 !important;
+					}
+				}
+			}
+		}
+		&[data-gs-tab="2"]{
+			> [data-gs-col]:nth-child(-n+2){
+				> *:first-child{
+					@include viewTab() {
+						margin-top: 0 !important;
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+
+//ヘルパークラスの調整
+//デフォルトのフォントサイズが要素内で異なる場合に使用、2px下げる
+@mixin defaultFontSizeChange($fz_sp,$fz_tabpc){
+	.fzs {
+		font-size: $fz_sp - 0.2rem;
+
+		@include viewTabPc() {
+			font-size: $fz_tabpc - 0.2rem;
+		}
+	}
+	.fzm {
+		font-size: $fz_sp;
+
+		@include viewTabPc() {
+			font-size: $fz_tabpc;
+		}
+	}
+	.fzl {
+		font-size: $fz_sp + 0.2rem;
+
+		@include viewTabPc() {
+			font-size: $fz_tabpc + 0.2rem;
+		}
+	}
+}
+
+/*
+ * Mixin for placeholder
+ * @include placeholderColor(#00ff00);
+ */
+@mixin placeholderColor($color) {
+    &:placeholder-shown {
+        color: $color;
+    }
+    &::-webkit-input-placeholder {
+        color:$color;
+    }
+    &:-moz-placeholder {
+        color:$color;
+        opacity: 1;
+    }
+    &::-moz-placeholder {
+        color:$color;
+        opacity: 1;
+    }
+    &:-ms-input-placeholder {
+        color:$color;
+    }
+}
+
+// media query
+@mixin viewSp() {
+	@media #{$breakSp} {
+		@content;
+	}
+}
+@mixin viewSpTab() {
+	@media #{$breakSpTab} {
+		@content;
+	}
+}
+
+@mixin viewTab {
+	@media #{$breakTab} {
+		@content;
+	}
+}
+
+@mixin viewTabPc {
+	@media #{$breakTabPc} {
+		@content;
+	}
+}
+
+@mixin viewPc {
+	@media #{$breakPc} {
+		@content;
+	}
+}
+
+@mixin hover() {
+	// &:focus{
+	[data-whatinput="keyboard"] &:focus{
+		@content;
+	}
+	@include viewPc() {
+		&:hover {
+			@content;
+		}
+	}
+}

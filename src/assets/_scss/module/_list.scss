@@ -1,0 +1,856 @@
+@charset "UTF-8";
+
+
+
+
+
+@mixin list-child(){
+	> ul, > ol{
+		margin-top: 5px;
+		counter-reset: number;
+
+		@include viewTabPc() {
+			margin-top: 5px;
+		}
+		> li{
+			padding-left: 12px;
+			margin-top: 5px;
+
+			@include viewTabPc() {
+				padding-left: 18px;
+			}
+
+		}
+
+		&.m-list-asterisk{
+			> li{
+				padding-left: 17px;
+
+				@include viewTabPc() {
+				}
+
+				&:before{
+					width: auto;
+					height: auto;
+					top: 0;
+					left: 0;
+				}
+			}
+
+		}
+	}
+
+	> ul{
+		> li{
+			&:before{
+				width: 2px;
+				height: 2px;
+				left: 3.5px;
+				top: .85em;
+
+				@include viewTabPc() {
+					width: 3px;
+					height: 3px;
+					left: 7px;
+					top: .95em;
+				}
+			}
+		}
+	}
+
+
+
+
+}
+
+
+
+.m-list-desc {
+	margin-top: 20px;
+
+	@include viewTabPc() {
+		margin-top: 40px;
+	}
+
+	a{
+		@include linkIcon($keyColor);
+	}
+
+	> li {
+		position: relative;
+		word-wrap : break-word;
+		overflow-wrap:break-word;
+		margin-top: 10px;
+		padding-left: 1.5em;
+		@include list-child();
+
+		@include viewTabPc() {
+			margin-top: 5px;
+			padding-left: 1.3em;
+		}
+
+		&:first-child{
+			margin-top: 0;
+		}
+
+		&:before{
+			position: absolute;
+			content:'';
+			width: 3px;
+			height: 3px;
+			border-radius:50%;
+			background-color: $defaultTxtColor;
+			top: .90em;
+			left: 5px;
+
+			@include viewTabPc() {
+				width: 6px;
+				height: 6px;
+				top: .90em;
+				left: 6px;
+			}
+		}
+
+	}
+
+
+	&.desc-inlineblock{
+		@include viewPc() {
+			margin-top: 30px;
+			margin-left: -20px;
+		}
+
+
+
+		> li{
+			@include viewPc() {
+				display: inline-block;
+				margin-left: 20px;
+				margin-top: 10px;
+				vertical-align: top;
+			}
+
+
+		}
+	}
+}
+
+
+
+.m-list-num {
+	margin-top: 20px;
+
+	@include viewTabPc() {
+		margin-top: 20px;
+	}
+
+	a{
+		@include linkIcon($keyColor);
+	}
+
+
+	> li {
+		margin-top: 20px;
+		padding-left: 1.5em;
+		counter-increment: number;
+		word-wrap : break-word;
+		overflow-wrap:break-word;
+		word-break: normal;
+		@include list-child();
+
+		@include viewTabPc() {
+			margin-top: 5px;
+			// padding-left: 1.0em;
+		}
+
+		&:first-child{
+			margin-top: 0;
+		}
+
+		&:before {
+			content: counter(number) ".";
+			display: inline-block;
+			vertical-align: top;
+			margin-left: -1.5em;
+			margin-right: .5em;
+
+			@include viewTabPc() {
+				margin-left: -1.5em;
+			}
+		}
+
+	}
+}
+
+
+// //(1)(2)(3)
+.m-list-num2 {
+	margin-top: 10px;
+
+	@include viewTabPc() {
+		margin-top: 20px;
+	}
+
+	a{
+		@include linkIcon($keyColor);
+	}
+
+
+	> li {
+		margin-top: 5px;
+		padding-left: 2.0em;
+		counter-increment: number;
+		word-wrap : break-word;
+		overflow-wrap:break-word;
+		word-break: normal;
+		@include list-child();
+
+		@include viewTabPc() {
+			margin-top: 5px;
+			padding-left: 2.0em;
+		}
+
+		&:first-child{
+			margin-top: 0;
+		}
+
+		&:nth-child(n):before {
+			content: unicode("ff08") counter(number) unicode("ff09");
+			display: inline-block;
+			vertical-align: top;
+			margin-left: -2.10em;
+			height: auto;
+			width: auto;
+			background: none;
+			top: auto;
+			position: relative;
+
+
+			@include viewTabPc() {
+				margin-left: -2.1em;
+			}
+		}
+
+	}
+}
+
+// /*-----------------
+// 	数字付きリスト
+// 	[1][2][3]
+// -----------------*/
+.m-list-num3 {
+	margin-top: 10px;
+
+	@include viewTabPc() {
+		margin-top: 20px;
+	}
+
+	a{
+		@include linkIcon($keyColor);
+	}
+
+
+	> li {
+		margin-top: 5px;
+		padding-left: 2.0em;
+		counter-increment: number;
+		word-wrap : break-word;
+		overflow-wrap:break-word;
+		word-break: normal;
+		@include list-child();
+
+		@include viewTabPc() {
+			margin-top: 5px;
+			padding-left: 2.0em;
+		}
+
+		&:first-child{
+			margin-top: 0;
+		}
+
+		&:nth-child(n):before {
+			content: '[' counter(number) ']';
+			display: inline-block;
+			vertical-align: top;
+			margin-left: -2.10em;
+			height: auto;
+			width: auto;
+			background: none;
+			top: auto;
+			position: relative;
+
+
+			@include viewTabPc() {
+				margin-left: -2.1em;
+			}
+		}
+
+	}
+}
+
+@mixin list-kana(){
+	&:before {
+		content: "";
+		width: 1em;
+		text-align: right;
+		background-color: transparent;
+		border-radius:auto;
+		height: auto;
+		top: auto;
+		position: relative;
+	}
+}
+
+// /*-----------------
+// 	数字付きリスト
+// 	① ② ③
+// -----------------*/
+// .m-list-num3 {
+// 	margin-top: 10px;
+
+// 	@include viewTabPc() {
+// 		margin-top: 20px;
+// 	}
+
+// 	a{
+// 		@include linkIcon($keyColor);
+// 	}
+
+
+// 	> li {
+// 		margin-top: 5px;
+// 		padding-left: 1.2em;
+// 		counter-increment: number;
+// 		word-wrap : break-word;
+// 		overflow-wrap:break-word;
+// 		word-break: normal;
+// 		list-style: none !important;
+// 		@include list-child();
+
+// 		@include viewTabPc() {
+// 			margin-top:5px;
+// 			padding-left: 1.2em;
+// 		}
+
+// 		&:first-child{
+// 			margin-top: 0;
+// 		}
+
+// 		&:before {
+// 			margin-left: -1.0em;
+// 			left: -2px;
+// 			margin-right: 0;
+// 			@include viewTabPc() {
+// 				margin-left: -1.0em;
+// 			}
+// 		}
+
+// 		&:nth-child(1) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("2460");
+// 			}
+// 		}
+// 		&:nth-child(2) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("2461");
+// 			}
+// 		}
+// 		&:nth-child(3) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("2462");
+// 			}
+// 		}
+// 		&:nth-child(4) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("2463");
+// 			}
+// 		}
+// 		&:nth-child(5) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("2464");
+// 			}
+// 		}
+// 		&:nth-child(6) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("2465");
+// 			}
+// 		}
+// 		&:nth-child(7) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("2466");
+// 			}
+// 		}
+// 		&:nth-child(8) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("2467");
+// 			}
+// 		}
+// 		&:nth-child(9) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("2468");
+// 			}
+// 		}
+// 		&:nth-child(10) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("2469");
+// 			}
+// 		}
+// 		&:nth-child(11) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("246a");
+// 			}
+// 		}
+// 		&:nth-child(12) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("246b");
+// 			}
+// 		}
+// 		&:nth-child(13) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("246c");
+// 			}
+// 		}
+// 		&:nth-child(14) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("246d");
+// 			}
+// 		}
+// 		&:nth-child(15) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("246e");
+// 			}
+// 		}
+// 		&:nth-child(16) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("246f");
+// 			}
+// 		}
+// 		&:nth-child(17) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("2470");
+// 			}
+// 		}
+// 		&:nth-child(18) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("2471");
+// 			}
+// 		}
+// 		&:nth-child(19) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("2472");
+// 			}
+// 		}
+// 		&:nth-child(20) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("2473");
+// 			}
+// 		}
+
+// 	}
+// }
+
+// /*-----------------
+// 	カタカナ表記付きリスト
+// 	ア イ ウ
+// -----------------*/
+// .m-list-num4 {
+// 	margin-top: 10px;
+
+// 	@include viewTabPc() {
+// 		margin-top: 20px;
+// 	}
+
+// 	a{
+// 		@include linkIcon($keyColor);
+// 	}
+
+
+// 	> li {
+// 		margin-top: 5px;
+// 		padding-left: 1.6em;
+// 		counter-increment: number;
+// 		word-wrap : break-word;
+// 		overflow-wrap:break-word;
+// 		word-break: normal;
+// 		list-style: none !important;
+// 		@include list-child();
+
+// 		@include viewTabPc() {
+// 			margin-top: 5px;
+// 			padding-left: 1.6em;
+// 		}
+
+// 		&:first-child{
+// 			margin-top: 0;
+// 		}
+
+// 		&:before {
+// 			margin-left: -1.0em;
+// 			left: -6px;
+// 			margin-right: 0;
+
+// 			@include viewTabPc() {
+// 				margin-left: -1.0em;
+// 			}
+// 		}
+// 		&:nth-child(1) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("30a2");
+// 			}
+// 		}
+// 		&:nth-child(2) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("30a4");
+// 			}
+// 		}
+// 		&:nth-child(3) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("30a6");
+// 			}
+// 		}
+// 		&:nth-child(4) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("30a8");
+// 			}
+// 		}
+// 		&:nth-child(5) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("30aa");
+// 			}
+// 		}
+// 		&:nth-child(6) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("30ab");
+// 			}
+// 		}
+// 		&:nth-child(7) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("30ad");
+// 			}
+// 		}
+// 		&:nth-child(8) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("30af");
+// 			}
+// 		}
+// 		&:nth-child(9) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("30b1");
+// 			}
+// 		}
+// 		&:nth-child(10) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("30b3");
+// 			}
+// 		}
+// 		&:nth-child(11) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("30b5");
+// 			}
+// 		}
+// 		&:nth-child(12) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("30b7");
+// 			}
+// 		}
+// 		&:nth-child(13) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("30b9");
+// 			}
+// 		}
+// 		&:nth-child(14) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("30bb");
+// 			}
+// 		}
+// 		&:nth-child(15) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("30bd");
+// 			}
+// 		}
+// 		&:nth-child(16) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("30bf");
+// 			}
+// 		}
+// 		&:nth-child(17) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("30c1");
+// 			}
+// 		}
+// 		&:nth-child(18) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("30c4");
+// 			}
+// 		}
+// 		&:nth-child(19) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("30c6");
+// 			}
+// 		}
+// 		&:nth-child(20) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("30c8");
+// 			}
+// 		}
+
+// 	}
+// }
+
+// /*-----------------
+// 	英数字付きリスト
+// 	ⅰ ⅱ ⅲ
+// -----------------*/
+// .m-list-num5 {
+// 	margin-top: 10px;
+
+// 	@include viewTabPc() {
+// 		margin-top: 20px;
+// 	}
+
+// 	a{
+// 		@include linkIcon($keyColor);
+// 	}
+
+
+// 	> li {
+// 		margin-top: 5px;
+// 		padding-left: 1.2em;
+// 		counter-increment: number;
+// 		word-wrap : break-word;
+// 		overflow-wrap:break-word;
+// 		word-break: normal;
+// 		list-style: none !important;
+// 		@include list-child();
+
+// 		@include viewTabPc() {
+// 			margin-top: 5px;
+// 			padding-left: 1.2em;
+// 		}
+
+// 		&:first-child{
+// 			margin-top: 0;
+// 		}
+
+// 		&:before {
+// 			margin-left: -1.0em;
+// 			left: -2px;
+// 			margin-right: 0;
+
+// 			@include viewTabPc() {
+// 				margin-left: -1.0em;
+// 			}
+// 		}
+// 		&:nth-child(1) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("2170");
+// 			}
+// 		}
+// 		&:nth-child(2) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("2171");
+// 			}
+// 		}
+// 		&:nth-child(3) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("2172");
+// 			}
+// 		}
+// 		&:nth-child(4) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("2173");
+// 			}
+// 		}
+// 		&:nth-child(5) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("2174");
+// 			}
+// 		}
+// 		&:nth-child(6) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("2175");
+// 			}
+// 		}
+// 		&:nth-child(7) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("2176");
+// 			}
+// 		}
+// 		&:nth-child(8) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("2177");
+// 			}
+// 		}
+// 		&:nth-child(9) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("2178");
+// 			}
+// 		}
+// 		&:nth-child(10) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("2179");
+// 			}
+// 		}
+// 		&:nth-child(11) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("217a");
+// 			}
+// 		}
+// 		&:nth-child(12) {
+// 			@include list-kana ;
+// 			&:before {
+// 				content: unicode("217b");
+// 			}
+// 		}
+// 	}
+// }
+
+
+
+
+ul.m-list-asterisk {
+	margin-top: 10px;
+	font-size: 1.2rem;
+	@include defaultFontSizeChange(1.2rem,1.4rem);
+
+	@include viewTabPc() {
+		margin-top: 20px;
+		font-size: 1.4rem;
+	}
+
+	a{
+		@include linkIcon($keyColor);
+	}
+
+	> li {
+		margin-top: 5px;
+		padding-left: 17px;
+		position: relative;
+		word-wrap : break-word;
+		overflow-wrap:break-word;
+		word-break: normal;
+		@include list-child();
+
+		@include viewTabPc() {
+			margin-top: 5px;
+			padding-left: 20px;
+		}
+
+		&:first-child{
+			margin-top: 0;
+		}
+
+		&:before{
+			position: absolute;
+			content:'';
+			top: 0;
+			left: 0;
+			content: unicode("203b");
+			background-color:transparent;
+		}
+
+	}
+}
+
+
+ol.m-list-asterisk {
+	margin-top: 10px;
+	font-size: 1.2rem;
+	@include defaultFontSizeChange(1.2rem,1.4rem);
+
+	@include viewTabPc() {
+		margin-top: 20px;
+		font-size: 1.4rem;
+	}
+
+	a{
+		@include linkIcon($keyColor);
+	}
+
+	> li {
+		margin-top: 5px;
+		padding-left: 2.7em;
+		counter-increment: number;
+		word-wrap : break-word;
+		overflow-wrap:break-word;
+		word-break: normal;
+
+		@include viewTabPc() {
+			margin-top: 5px;
+			padding-left: 2.6em;
+		}
+
+		&:first-child{
+			margin-top: 0;
+		}
+
+		&:before {
+			content: unicode("203b") counter(number) unicode("ff1a");
+			display: inline-block;
+			vertical-align: top;
+			margin-left: -2.8em;
+			margin-right: 2px;
+
+			@include viewTabPc() {
+				margin-left: -2.6em;
+				margin-right: auto;
+
+			}
+		}
+
+		@include list-child();
+	}
+
+}
+

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>アコーディオン</title>
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta name="format-detection" content="telephone=no">
+
+	<link rel="stylesheet" href="/assets/css/common.css">
+</head>
+
+<body id="top" class="">
+	<noscript>JavascriptがOFFのため正しく表示されない可能性があります。</noscript>
+
+	<!-- [ WRAP ] -->
+	<div id="l-wrap">
+		<!-- [ GLOBAL HEADER ] -->
+		<?php include($_SERVER['DOCUMENT_ROOT'] . "/" . "/assets/parts/header.html"); ?>
+		<!-- [ /GLOBAL HEADER ] -->
+
+		<!-- [ CONTENT ] -->
+		<main id="l-content">
+
+			<div class="m-txt-ttl">
+				<div data-fixed>
+					<div class="ttl-inner">
+						<h1 class="inner-ttl">アコーディオンUI</h1>
+					</div>
+				</div>
+			</div>
+
+			<div class="content-inner" data-fixed>
+
+				<h2 class="m-txt-ttl2">実装例</h2>
+
+<!-- 				<div class="m-box-accordion" data-accordion>
+					<button class="accordion-head" aria-expanded="false" aria-controls="acc-panel-1">
+						<div class="head-wrap">
+							<span class="head-prefix">Q1.</span>
+							<span class="head-ttl">質問タイトル</span>
+						</div>
+					</button>
+					<div class="accordion-body" id="acc-panel-1" aria-hidden="true">
+						<p class="m-txt-p">
+							質問回答<br>
+							ダミーテキストダミーテキストダミーテキスト
+						</p>
+					</div>
+				</div> -->
+
+				<ul role="tablist" aria-multiselectable="true">
+					<li class="m-box-accordion" data-accordion role="none presentation">
+						<button class="accordion-head" aria-expanded="false" aria-controls="acc-panel-1" role="tab">
+							<div class="head-wrap">
+								<span class="head-prefix">Q1.</span>
+								<span class="head-ttl">質問タイトル</span>
+							</div>
+						</button>
+						<div class="accordion-body" id="acc-panel-1" aria-hidden="true" role="tabpanel">
+							<p class="m-txt-p">
+								質問回答<br>
+								ダミーテキストダミーテキストダミーテキスト
+							</p>
+						</div>
+					</li>
+					<li class="m-box-accordion" data-accordion role="none presentation">
+						<button class="accordion-head" aria-expanded="false" aria-controls="acc-panel-2" role="tab">
+							<div class="head-wrap">
+								<span class="head-prefix">Q2.</span>
+								<span class="head-ttl">質問タイトル</span>
+							</div>
+						</button>
+						<div class="accordion-body" id="acc-panel-2" aria-hidden="true" role="tabpanel">
+							<p class="m-txt-p">
+								質問回答<br>
+								ダミーテキストダミーテキストダミーテキスト
+							</p>
+						</div>
+					</li>
+					<li class="m-box-accordion" data-accordion role="none presentation">
+						<button class="accordion-head" aria-expanded="false" aria-controls="acc-panel-3" role="tab">
+							<div class="head-wrap">
+								<span class="head-prefix">Q3.</span>
+								<span class="head-ttl">質問タイトル</span>
+							</div>
+						</button>
+						<div class="accordion-body" id="acc-panel-3" aria-hidden="true" role="tabpanel">
+							<p class="m-txt-p">
+								質問回答<br>
+								ダミーテキストダミーテキストダミーテキスト
+							</p>
+						</div>
+					</li>
+					<li class="m-box-accordion" data-accordion role="none presentation">
+						<button class="accordion-head" aria-expanded="false" aria-controls="acc-panel-4" role="tab">
+							<div class="head-wrap">
+								<span class="head-prefix">Q4.</span>
+								<span class="head-ttl">質問タイトル</span>
+							</div>
+						</button>
+						<div class="accordion-body" id="acc-panel-4" aria-hidden="true" role="tabpanel">
+							<p class="m-txt-p">
+								質問回答<br>
+								ダミーテキストダミーテキストダミーテキスト
+							</p>
+						</div>
+					</li>
+				</ul>
+
+
+				<h2 class="m-txt-ttl2">アコーディオンについて</h2>
+				<p class="m-txt-p">
+					role="tablist"<br>
+					ulタグを使用しているが、挙動はタブUIと同じため
+				</p>
+				<p class="m-txt-p">
+					aria-multiselectable属性は複数選択可能な選択項目があることを示すWAI-ARIA属性です。
+
+				</p>
+				<p class="m-txt-p">
+					ReactとWAI-ARIAでアクセシブルなアコーディオンUIを実装してみた | masuP.net<br>
+					https://masup.net/2016/09/accordion-ui-with-react-wai-aria.shtml
+
+
+
+				</p>
+
+
+
+
+			</div>
+		</main>
+		<!-- [ /CONTENT ] -->
+
+
+		<div class="m-box-pagepath">
+			<ul class="pagepath-list" data-fixed>
+				<li class="list-item"><a href="/" class="item-inner">ホーム</a></li>
+				<li class="list-item"><a href="/" class="item-inner">パーツセット</a></li>
+				<li class="list-item"><span class="item-inner">アコーディオン</span></li>
+			</ul>
+		</div>
+		<!-- [ GLOBAL FOOTER ] -->
+		<?php include($_SERVER['DOCUMENT_ROOT'] . "/" . "/assets/parts/footer.html"); ?>
+		<!-- [ /GLOBAL FOOTER ] -->
+		<div class="hide-tab" data-device></div>
+		<div class="hide-pc" data-device></div>
+	</div>
+	<!-- [ WRAP ] -->
+
+
+	<script src="/assets/js/library.js"></script>
+	<script src="/assets/js/setting.js"></script>
+	<script src="/assets/js/function.js"></script>
+	<script src="/assets/js/common.js"></script>
+</body>
+</html>

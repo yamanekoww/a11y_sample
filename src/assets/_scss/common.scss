@@ -1,0 +1,103 @@
+@charset "UTF-8";
+
+@import "core";
+
+//リセット
+@import "core/normalize";
+@import "core/minimum_reset";
+
+@import "core/helper";
+
+@import "module/box";
+@import "module/icon";
+@import "module/list";
+@import "module/table";
+@import "module/text";
+@import "module/btn";
+
+@include  yakuhan();
+
+html {
+	color: $defaultTxtColor;
+	font-family: $fontfamily;
+	font-size: 62.5%;
+}
+
+body {
+	line-height: $lineHeight;
+	font-size: $defaultTxtSizeSp;
+
+	@include viewTabPc() {
+		font-size: $defaultTxtSizePc;
+	}
+}
+
+
+/* link style */
+a:link {
+	color: $defaultLinkColor;
+	text-decoration: none;
+}
+
+a:visited {
+	color: $defaultLinkColor;
+	text-decoration: none;
+}
+
+a:hover, a:active {
+	color: $defaultLinkColor;
+	text-decoration: underline;
+}
+
+#l-wrap{
+
+
+	// media query
+	// @include viewTabPc() {
+	// 	background-color: #bbb;
+	// }
+	@include viewTabPc() {
+	}
+
+
+}
+
+/* header style */
+#l-header {
+	background:#141414;
+	color: #fff;
+	text-align: center;
+	padding: 20px;
+}
+
+
+/* content style */
+#l-content {
+	.content-inner{
+		padding-top: 80px;
+		padding-bottom: 80px;
+		@include childMarginTop0();
+
+	}
+}
+
+/* footer style */
+#l-footer {
+	background:#141414;
+	color: #fff;
+	text-align: center;
+	padding: 20px;
+}
+
+/* print style */
+@media print {
+	html {
+		background: none;
+	}
+
+	body {
+		padding: 0;
+		background: none;
+	}
+
+}

@@ -1,0 +1,180 @@
+@charset "UTF-8";
+
+
+
+
+.m-table-common {
+	width: 100%;
+	margin-top: 30px;
+
+	@include viewTabPc() {
+		margin-top: 40px;
+	}
+
+	a {
+		&:link,&:visited{
+			text-decoration: underline;
+		}
+
+		@include hover() {
+			&:link,&:visited{
+				text-decoration: none;
+			}
+
+		}
+	}
+
+	tbody,thead {
+		tr {
+			th,td {
+				padding: 15px 10px;
+				box-sizing: border-box;
+				border: 1px solid #000;
+				text-align: left;
+
+				@include viewTabPc() {
+					padding: 20px;
+				}
+			}
+
+			th {
+				font-weight: normal;
+				vertical-align: top;
+				@include childMarginTop0() ;
+
+				a{
+					@include linkIcon($defaultTxtColor);
+
+				}
+			}
+			td {
+				@include childMarginTop0() ;
+				vertical-align: top;
+			}
+		}
+	}
+	thead{
+		th,td{
+			background: #e6e6e6;
+			vertical-align: middle;
+			font-weight: normal;
+		}
+	}
+	tbody{
+		th{
+			background-color: #f4f4f4;
+		}
+		td{
+			a{
+				@include linkIcon($keyColor);
+			}
+		}
+	}
+
+
+	[align="center"] {
+		text-align: center !important;
+	}
+
+	[align="right"] {
+		text-align: right !important;
+	}
+
+	[valign="top"]{
+		vertical-align: top !important;
+	}
+
+	[valign="middle"]{
+		vertical-align: middle !important;
+	}
+
+	[valign="bottom"]{
+		vertical-align: bottom !important;
+	}
+
+
+
+
+	&+.m-txt-p{
+		margin-top: 10px;
+
+		@include viewTabPc() {
+			margin-top: 20px;
+		}
+	}
+
+
+	&.is-tablefixed{
+		table-layout: fixed;
+	}
+
+	&.table-break{
+		@include viewSp() {
+			th,td{
+				display: block;
+
+
+			}
+			th{
+				border-bottom:none;
+
+			}
+			td{
+				border-top:none;
+
+			}
+			tr{
+				&+tr{
+					th{
+						border-top:none;
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+
+.m-table-scroll {
+	position: relative;
+	margin-top: 20px;
+
+
+	.scroll-wrap{
+		overflow-x: scroll;
+		padding-bottom: 10px;
+
+		table {
+			margin-top: 0;
+			min-width: 750px;
+		}
+
+		&::-webkit-scrollbar {
+			width: 15px;
+			height: 8px;
+		}
+
+		&::-webkit-scrollbar-thumb{
+			background: #dcdcdc;
+			border-radius: 8px;
+		}
+
+		&::-webkit-scrollbar-track-piece:start{
+		}
+
+		&::-webkit-scrollbar-track-piece:end{
+		}
+	}
+
+
+	&+.m-txt-p{
+		margin-top: 10px;
+
+		@include viewTabPc() {
+			margin-top: 20px;
+		}
+	}
+
+}
